@@ -1,0 +1,3 @@
+/home/anastasia/lab4/tpmp-gr9a-lab4-nastya2x/CMakeFiles/autopark_app.dir
+/home/anastasia/lab4/tpmp-gr9a-lab4-nastya2x/CMakeFiles/edit_cache.dir
+/home/anastasia/lab4/tpmp-gr9a-lab4-nastya2x/CMakeFiles/rebuild_cache.dir
