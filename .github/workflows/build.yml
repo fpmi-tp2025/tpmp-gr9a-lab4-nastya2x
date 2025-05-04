@@ -1,14 +1,43 @@
-name: Build & Test
+name: CMake Build and Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    # Шаг 1: Клонирование репозитория
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Шаг 2: Установка необходимых зависимостей
+    - name: Set up CMake
+      uses: actions/setup-cmake@v1
+      with:
+        cmake-version: '3.21.0'
+
     - name: Install dependencies
-      run: sudo apt-get install g++ make sqlite3 libsqlite3-dev
-    - name: Build
-      run: make
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev libsqlite3-dev
+
+    # Шаг 3: Сборка проекта
+    - name: Build the project
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make
+
+    # Шаг 4: Запуск тестов
+    - name: Run tests
+      run: |
+        cd build
+        ctest --verbose
