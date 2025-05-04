@@ -1,0 +1,10 @@
+theme: minima
+title: Автопарк
+description: Документация проекта "Автопарк"
+nav:
+  - Home: index.md
+  - Глоссарий: glossary.md
+  - Требования: requirements.md
+  - Диаграммы: diagrams.md
+  - База данных: database.md
+  - Курсы участников: project_links.md
