@@ -20,7 +20,7 @@ jobs:
     # Шаг 2: Установка необходимых зависимостей
     - name: Install dependencies
       run: |
-        sudo apt-get install -y libtest-dev
+        sudo apt-get install -y libgtest-dev
         libsqlite3-dev
         make gcc
 
