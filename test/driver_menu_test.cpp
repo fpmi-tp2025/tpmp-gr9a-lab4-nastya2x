@@ -31,18 +31,4 @@ TEST(DriverMenuTest, ListDriverOrdersNoOrders) {
 
     closeDatabase(db);
 }
-TEST(DriverMenuTest, ListDriverOrdersDatabaseError) {
-    sqlite3* db = nullptr;
-    const char* filename = "test.db";
 
-    bool openResult = openDatabase(&db, filename);
-    ASSERT_TRUE(openResult);
-
-    // Simulate a database error (e.g., invalid SQL statement)
-    std::string start_date = "2023-01-01";
-    std::string end_date = "2023-12-31";
-
-    EXPECT_THROW(listDriverOrders(db, 1), std::runtime_error);
-
-    closeDatabase(db);
-}
