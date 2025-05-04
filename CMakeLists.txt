@@ -1,32 +1,55 @@
+# Минимальная версия CMake
 cmake_minimum_required(VERSION 3.10)
 
-# Указываем название проекта
-project(AutoparkApp)
+# Название проекта
+project(AutoParkApp)
 
-# Устанавливаем стандарт C++17
+# Установим стандарт C++
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Если используем старый GCC (до 8.1), добавляем флаг для файловой системы
-if(CMAKE_COMPILER_IS_GNUCXX AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.1)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lstdc++fs")
-endif()
-
-# Указываем, где находятся заголовочные файлы
+# Указываем папки с исходными файлами
 include_directories(includes)
+include_directories(src)
 
-# Указываем исходные файлы
-set(SRC 
-    src/main.cpp
+# Указываем путь к заголовочным файлам Google Test
+find_package(GTest REQUIRED)
+
+# Указываем путь к библиотеке SQLite3
+find_package(SQLite3 REQUIRED)
+
+# Добавляем тесты
+enable_testing()
+
+# Создаем основной исполнимый файл
+add_executable(autopark_app
     src/db.cpp
+    src/admin_menu.cpp
     src/auth.cpp
     src/driver_menu.cpp
-    src/admin_menu.cpp
+    src/main.cpp
 )
 
-# Указываем файл для сборки
-add_executable(autopark_app ${SRC})
+# Линкуем приложение с SQLite3
+target_link_libraries(autopark_app sqlite3)
 
-# Линки для SQLite3
-find_package(SQLite3 REQUIRED)
-target_link_libraries(autopark_app SQLite::SQLite3)
+# Добавляем тесты
+add_executable(tests
+    test/db_test.cpp
+    test/admin_menu_test.cpp
+    test/auth_test.cpp
+    test/driver_menu_test.cpp
+    src/db.cpp  # Включаем исходники в тесты
+    src/admin_menu.cpp
+    src/auth.cpp
+    src/driver_menu.cpp
+)
+
+# Линкуем тесты с Google Test и SQLite3
+target_link_libraries(tests GTest::GTest GTest::Main sqlite3)
+
+# Добавляем тесты в CMake
+add_test(NAME AllTests COMMAND tests)
+
+# Можно указать, чтобы CMake автоматически запускал тесты
+include(GoogleTest)
+gtest_discover_tests(tests)
