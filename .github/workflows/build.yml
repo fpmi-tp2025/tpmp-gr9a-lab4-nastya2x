@@ -15,14 +15,13 @@ jobs:
     steps:
     # Шаг 1: Клонирование репозитория
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
 
     # Шаг 2: Установка необходимых зависимостей
     - name: Install dependencies
       run: |
-        sudo apt-get install -y libgtest-dev
-        libsqlite3-dev
-        make gcc
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev libsqlite3-dev make gcc
 
     # Шаг 3: Сборка проекта
     - name: Build the project
