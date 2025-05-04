@@ -19,7 +19,7 @@ jobs:
 
     # Шаг 2: Установка необходимых зависимостей
     - name: Set up CMake
-      uses: actions/setup-cmake@v2
+      uses: actions/setup-cmake@v4
       with:
         cmake-version: '3.21.0'
 
