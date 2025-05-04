@@ -15,7 +15,7 @@ jobs:
     steps:
     # Шаг 1: Клонирование репозитория
     - name: Checkout code
-      uses: actions/checkout@v
+      uses: actions/checkout@v4
 
     # Шаг 2: Установка необходимых зависимостей
     - name: Set up CMake
