@@ -15,11 +15,11 @@ jobs:
     steps:
     # Шаг 1: Клонирование репозитория
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v
 
     # Шаг 2: Установка необходимых зависимостей
     - name: Set up CMake
-      uses: actions/setup-cmake@v1
+      uses: actions/setup-cmake@v4
       with:
         cmake-version: '3.21.0'
 
